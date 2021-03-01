@@ -1,0 +1,103 @@
+html {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+.solar-system {
+    margin: 0 auto;
+    height: 700px;
+    width: 700px;
+    position: relative;
+}
+
+.planet {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 10px
+}
+
+.sun {
+    background: yellow;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.ferengi {
+    background: grey;
+    position: absolute;
+    top: 50%;
+    left: 62.5%;
+}
+
+.betasoide {
+    background: blue;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+}
+
+.vulcano {
+    background: red;
+    position: absolute;
+    top: 50%;
+    left: 75%;
+}
+
+.button-wrap {
+    width: 260px;
+    margin: 0 auto;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+button {
+    width: 33%;
+    height: 50px;
+    padding: 10px;
+    float: left;
+}
+
+.moveBtn {
+    background: lightgreen;
+}
+
+.resetBtn {
+    background: lightyellow;
+}
+
+.processBtn {
+    background: lightblue;
+}
+
+.area {
+    font-size: 1.5em;
+    width: 650px;
+    margin: 0;
+}
+
+#t01 {
+  width:100%;
+  margin-top: 20px;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+#t01 th {
+  background-color: lightgreen;
+  color: white;
