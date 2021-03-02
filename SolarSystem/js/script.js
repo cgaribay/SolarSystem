@@ -178,12 +178,12 @@ function getCoordinates() {
 }
 
 function convertPositions() {
-    ferengi.style.top = ((distances[2] - positions[0].y) * 100 / 4000) + "%";
-    ferengi.style.left = ((distances[2] + positions[0].x) * 100 / 4000) + "%";
-    vulcano.style.top = ((distances[2] - positions[1].y) * 100 / 4000) + "%";
-    vulcano.style.left = ((distances[2] + positions[1].x) * 100 / 4000) + "%";
-    betasoide.style.top = ((distances[2] - positions[2].y) * 100 / 4000) + "%";
-    betasoide.style.left = ((distances[2] + positions[2].x) * 100 / 4000) + "%";
+    ferengi.style.top = ((distances[2] - positions[0].y) / 40) + "%";
+    ferengi.style.left = ((distances[2] + positions[0].x) / 40) + "%";
+    vulcano.style.top = ((distances[2] - positions[1].y) / 40) + "%";
+    vulcano.style.left = ((distances[2] + positions[1].x) / 40) + "%";
+    betasoide.style.top = ((distances[2] - positions[2].y) / 40) + "%";
+    betasoide.style.left = ((distances[2] + positions[2].x) / 40) + "%";
 }
 
 function resetPlanets() {
