@@ -74,6 +74,49 @@ function movePlanets() {
     determineForecast();
 }
 
+function getMaxRainDays(planet){
+    let rainDates = [];
+    if (planet == "ferengi") {
+        for (let i = 0; i < 10; i++) {
+            conditionsCnts.max_rain.forEach((item) => rainDates.push(item + 360 * i));
+        }
+    } else if (planet == "vulcano") {
+        for (let i = 0; i < 2; i++) {
+            conditionsCnts.max_rain.forEach((item) => rainDates.push(item + 360 * i));
+        }
+    } else if (planet == "betasoide"){
+        for (let i = 0; i < 3; i++) {
+            conditionsCnts.max_rain.forEach((item) => rainDates.push(item + 360 * i));
+        }
+        for (let i = 0; i < conditionsCnts.max_rain.length; i++) {
+            if (conditionsCnts.max_rain[i] <= 120) {
+                rainDates.push(conditionsCnts.max_rain[i] + 1080);
+            } else {
+                break;
+            }
+        }
+    }
+    return rainDates;
+}
+
+function betasoideCnts() {
+    let betasoideConditions = {dry: 0, optimum: 0, rain: 0};
+    for (let i = 0; i < forecast.length; i++) {
+        if (forecast[i].day <= 120) {
+            if (forecast[i].status == "dry") {
+                betasoideConditions.dry++;
+            } else if (forecast[i].status == "optimum") {
+                betasoideConditions.optimum++;
+            } else if (forecast[i].status == "max_rain") {
+                betasoideConditions.rain++;
+            }
+        } else {
+            break;
+        }
+    }
+    return betasoideConditions;
+}
+
 function processForecast() {
     for (let i = 0; i < 359; i++) {
         positions[0].d = (positions[0].d - 1) === 0 ? 360 : (positions[0].d - 1);
@@ -87,17 +130,17 @@ function processForecast() {
     document.querySelector("#ferengi td:nth-child(2)").innerHTML = `${conditionsCnts.dry * 10}`;
     document.querySelector("#ferengi td:nth-child(3)").innerHTML = `${conditionsCnts.optimum * 10}`;
     document.querySelector("#ferengi td:nth-child(4)").innerHTML = `${conditionsCnts.rain * 10}`;
-    document.querySelector("#ferengi td:nth-child(5)").innerHTML = conditionsCnts.max_rain.join(", ");
+    document.querySelector("#ferengi td:nth-child(5)").innerHTML = getMaxRainDays("ferengi").join(", ");
     
     document.querySelector("#vulcano td:nth-child(2)").innerHTML = `${conditionsCnts.dry * 2}`;
     document.querySelector("#vulcano td:nth-child(3)").innerHTML = `${conditionsCnts.optimum * 2}`;
     document.querySelector("#vulcano td:nth-child(4)").innerHTML = `${conditionsCnts.rain * 2}`;
-    document.querySelector("#vulcano td:nth-child(5)").innerHTML = conditionsCnts.max_rain.join(", ");
+    document.querySelector("#vulcano td:nth-child(5)").innerHTML = getMaxRainDays("vulcano").join(", ");
     
-    document.querySelector("#betasoide td:nth-child(2)").innerHTML = `${conditionsCnts.dry * 3}`;
-    document.querySelector("#betasoide td:nth-child(3)").innerHTML = `${conditionsCnts.optimum * 3}`;
-    document.querySelector("#betasoide td:nth-child(4)").innerHTML = `${conditionsCnts.rain * 3}`;
-    document.querySelector("#betasoide td:nth-child(5)").innerHTML = conditionsCnts.max_rain.join(", ");
+    document.querySelector("#betasoide td:nth-child(2)").innerHTML = `${conditionsCnts.dry * 3 + betasoideCnts().dry}`;
+    document.querySelector("#betasoide td:nth-child(3)").innerHTML = `${conditionsCnts.optimum * 3 + betasoideCnts().optimum}`;
+    document.querySelector("#betasoide td:nth-child(4)").innerHTML = `${conditionsCnts.rain * 3 + betasoideCnts().rain}`;
+    document.querySelector("#betasoide td:nth-child(5)").innerHTML = getMaxRainDays("betasoide").join(", ");
 }
 
 function computeTriangleArea(a, b, c) {
